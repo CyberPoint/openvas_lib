@@ -3,6 +3,7 @@
 
 from __future__ import print_function
 
+from builtins import object
 """OpenVas Data Structures."""
 
 import re
@@ -954,7 +955,7 @@ class OpenVASResult(_Common):
 			if range_text:
 				# Looking for text and their var correspondence
 				var_name = None
-				for y, v in var_maps.items():
+				for y, v in list(var_maps.items()):
 					if y in positions[keys[x]]:
 						var_name = v
 						break

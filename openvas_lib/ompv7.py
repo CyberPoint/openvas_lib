@@ -4,7 +4,11 @@
 """
 This file contains OMPv7 implementation
 """
+from __future__ import print_function
+from __future__ import division
 
+from builtins import str
+from past.utils import old_div
 from openvas_lib import *
 from openvas_lib.common import *
 
@@ -902,7 +906,7 @@ class OMPv7(OMP):
 			return 100.0  # Task finished
 
 		try:
-			return m_sum_progress / m_progress_len
+			return old_div(m_sum_progress, m_progress_len)
 		except ZeroDivisionError:
 			return 0.0
 

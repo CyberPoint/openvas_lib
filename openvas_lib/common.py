@@ -3,6 +3,8 @@
 
 from __future__ import print_function
 
+from builtins import str
+from builtins import object
 """
 This file contains interfaces for OMP implementations
 """
