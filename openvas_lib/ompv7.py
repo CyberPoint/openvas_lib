@@ -8,6 +8,7 @@ from __future__ import print_function
 from __future__ import division
 
 from builtins import str
+import future
 from past.utils import old_div
 from openvas_lib import *
 from openvas_lib.common import *
@@ -271,7 +272,7 @@ class OMPv7(OMP):
 
 			return m_return
 		else:
-			if not isinstance(user_id, str):
+			if not isinstance(user_id, str) and not isinstance(user_id,future.types.newstr):
 				raise TypeError("Expected string, got %r instead" % type(user_id))
 
 			return self._manager.make_xml_request("""<get_users user_id='%s'/>""" % user_id, xml_result=True).find('.//user[@id="%s"]' % user_id)
@@ -353,7 +354,7 @@ class OMPv7(OMP):
 
 				m_return[x.find("name").text.lower()] = {'id' : x.get("id"), 'port_ranges': port_ranges}
 		else:
-			if not isinstance(port_list_id, str):
+			if not isinstance(port_list_id, str) and not isinstance(port_list_id,future.types.newstr):
 				raise TypeError("Expected string, got %r instead" % type(port_list_id))
 
 			port_list = self._manager.make_xml_request("""<get_port_lists port_list_id='%s' details='1'/>""" % port_list_id, xml_result=True).find('.//port_list[@id="%s"]' % port_list_id)
@@ -580,7 +581,7 @@ class OMPv7(OMP):
 			port_list = self.get_port_lists().get("openvas default").get('id')
 
 		from collections import Iterable
-		if isinstance(hosts, str):
+		if isinstance(hosts, str) or isinstance(hosts,future.types.newstr):
 			m_targets = hosts
 		elif isinstance(hosts, Iterable):
 			m_targets = str(",".join(hosts))
@@ -749,7 +750,7 @@ class OMPv7(OMP):
 
 		:raises: ClientError, ServerError
 		"""
-		if not isinstance(task_id, str):
+		if not isinstance(task_id, str) and not isinstance(task_id,future.types.newstr):
 			raise TypeError("Expected string, got %r instead" % type(task_id))
 
 		m_query = '<start_task task_id="%s"/>' % task_id
@@ -882,7 +883,7 @@ class OMPv7(OMP):
 
 		:raises: ClientError, ServerError
 		"""
-		if not isinstance(task_id, str):
+		if not isinstance(task_id, str) and not isinstance(task_id,future.types.newstr):
 			raise TypeError("Expected string, got %r instead" % type(task_id))
 
 		m_sum_progress = 0.0  # Partial progress
@@ -925,7 +926,7 @@ class OMPv7(OMP):
 		:raises: ClientError, ServerError
 		"""
 
-		if not isinstance(task_id, str):
+		if not isinstance(task_id, str) and not isinstance(task_id,future.types.newstr):
 			raise TypeError("Expected string, got %r instead" % type(task_id))
 
 		try:
@@ -950,7 +951,7 @@ class OMPv7(OMP):
 
 		:raises: ClientError, ServerError
 		"""
-		if not isinstance(task_id, str):
+		if not isinstance(task_id, str) and not isinstance(task_id,future.types.newstr):
 			raise TypeError("Expected string, got %r instead" % type(task_id))
 
 		status = self._get_tasks().find('.//task[@id="%s"]/status' % task_id)
@@ -975,7 +976,7 @@ class OMPv7(OMP):
 		:raises: ClientError, ServerError
 		"""
 
-		if not isinstance(task_id, str):
+		if not isinstance(task_id, str) and not isinstance(task_id,future.types.newstr):
 			raise TypeError("Expected string, got %r instead" % type(task_id))
 
 		status = self.get_task_status(task_id)
@@ -1077,7 +1078,7 @@ class OMPv7(OMP):
 		:rtype: base64
 
 		"""
-		if not isinstance(report_id, str):
+		if not isinstance(report_id, str) and not isinstance(report_id,future.types.newstr):
 			raise TypeError("Expected string, got %r instead" % type(report_id))
 
 		m_response = ""
@@ -1104,7 +1105,7 @@ class OMPv7(OMP):
 		:rtype: `ElementTree`
 
 		"""
-		if not isinstance(report_id, str):
+		if not isinstance(report_id, str) and not isinstance(report_id,future.types.newstr):
 			raise TypeError("Expected string, got %r instead" % type(report_id))
 
 		try:

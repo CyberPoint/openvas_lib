@@ -1,10 +1,13 @@
-#!/usr/bin/python
+ #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
 from __future__ import print_function
 
 from builtins import str
 from builtins import object
+
+import future
+
 """
 This file contains interfaces for OMP implementations
 """
@@ -130,9 +133,9 @@ class ConnectionManager(object):
 		:type timeout: int
 		"""
 
-		if not isinstance(host, str):
+		if not isinstance(host, str) and not isinstance(host,future.types.newstr):
 			raise TypeError("Expected string, got %r instead" % type(host))
-		if not isinstance(username, str):
+		if not isinstance(username, str) and not isinstance(username,future.types.newstr):
 			raise TypeError("Expected string, got %r instead" % type(username))
 		if isinstance(port, int):
 			if not (0 < port < 65535):
@@ -229,9 +232,9 @@ class ConnectionManager(object):
 
 		:raises: AuthFailedError, TypeError
 		"""
-		if not isinstance(username, str):
+		if not isinstance(username, str) and not isinstance(username,future.types.newstr):
 			raise TypeError("Expected string, got %r instead" % type(username))
-		if not isinstance(password, str):
+		if not isinstance(password, str) and not isinstance(password,future.types.newstr):
 			raise TypeError("Expected string, got %r instead" % type(password))
 
 		m_request = """<authenticate>
@@ -376,7 +379,7 @@ class ConnectionManager(object):
 
 		:raises: ClientError, ServerError, TypeError, ValueError
 		"""
-		if not isinstance(xmldata, str):
+		if not isinstance(xmldata, str) and not isinstance(xmldata,future.types.newstr):
 			raise TypeError("Expected str, got '%s' instead" % type(xmldata))
 		if not isinstance(xml_result, bool):
 			raise TypeError("Expected bool, got '%s' instead" % type(xml_result))

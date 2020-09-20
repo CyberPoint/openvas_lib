@@ -22,6 +22,7 @@ except ImportError:
 	from xml.etree import ElementTree as etree
 
 from collections import Iterable
+import future 
 
 from openvas_lib.data import *
 from openvas_lib.utils import *
@@ -90,7 +91,7 @@ def report_parser_from_text(text, ignore_log_info=True):
 	if isinstance(text, bytes):
 		text = text.decode()
 
-	if not isinstance(text, str):
+	if not isinstance(text, str) and not isinstance(text,future.types.newstr):
 		raise TypeError("Expected str, got '%s' instead" % type(text))
 
 	try:
@@ -134,7 +135,7 @@ def report_parser(path_or_file, ignore_log_info=True):
 	:return: list of OpenVASResult structures.
 	:rtype: list(OpenVASResult)
 	"""
-	if isinstance(path_or_file, str):
+	if isinstance(path_or_file, str) and not isinstance(path_or_file,future.types.newstr):
 		if not os.path.exists(path_or_file):
 			raise IOError("File %s not exits." % path_or_file)
 		if not os.path.isfile(path_or_file):
@@ -518,11 +519,11 @@ class VulnscanManager(object):
 		:raises: VulnscanServerError, VulnscanAuthFail, VulnscanVersionError
 		"""
 
-		if not isinstance(host, str):
+		if not isinstance(host, str) and not isinstance(host,future.types.newstr):
 			raise TypeError("Expected string, got %r instead" % type(host))
-		if not isinstance(user, str):
+		if not isinstance(user, str) and not isinstance(user,future.types.newstr):
 			raise TypeError("Expected string, got %r instead" % type(user))
-		if not isinstance(password, str):
+		if not isinstance(password, str) and not isinstance(password,future.types.newstr):
 			raise TypeError("Expected string, got %r instead" % type(password))
 		if isinstance(port, int):
 			if not (0 < port <= 65535):
@@ -647,11 +648,11 @@ class VulnscanManager(object):
 		:rtype: (str, str)
 		"""
 
-		if not (isinstance(target, str) or isinstance(target, Iterable)):
+		if not ((isinstance(target, str) and not isinstance(target,future.types.newstr)) or isinstance(target, Iterable)):
 			raise TypeError("Expected str or iterable, got %r instead" % type(target))
 
 		profile = kwargs.get("profile", "Full and fast")
-		if not isinstance(profile, str):
+		if not isinstance(profile, str) and not isinstance(profile,future.types.newstr):
 			raise TypeError("Expected string, got %r instead" % type(profile))
 
 		schedule = kwargs.get("schedule",None)
@@ -684,7 +685,7 @@ class VulnscanManager(object):
 		comment = str(kwargs.get("comment", 'New scan launched on target hosts: %s' % ",".join(target)))
 
 		port_list_name = kwargs.get("port_list", "openvas default")
-		if not isinstance(port_list_name, str):
+		if not isinstance(port_list_name, str) and not isinstance(port_list_name,future.types.newstr):
 			raise TypeError("Expected string, got %r instead" % type(port_list_name))
 
 		try:
@@ -978,7 +979,7 @@ class VulnscanManager(object):
 		:raises: ServerError, TypeError
 		"""
 
-		if not isinstance(task_id, str):
+		if not isinstance(task_id, str) and not isinstance(task_id,future.types.newstr):
 			raise TypeError("Expected string, got %r instead" % type(task_id))
 
 		if self.__manager.is_task_running(task_id):
@@ -1012,7 +1013,7 @@ class VulnscanManager(object):
 		:raises: ServerError, TypeError
 		"""
 
-		if not isinstance(task_id, str):
+		if not isinstance(task_id, str) and not isinstance(task_id,future.types.newstr):
 			raise TypeError("Expected string, got %r instead" % type(task_id))
 
 		if self.__manager.is_task_running(task_id):
@@ -1029,7 +1030,7 @@ class VulnscanManager(object):
 	# ----------------------------------------------------------------------
 	def get_report_id(self, scan_id):
 
-		if not isinstance(scan_id, str):
+		if not isinstance(scan_id, str) and not isinstance(scan_id,future.types.newstr):
 			raise TypeError("Expected string, got %r instead" % type(scan_id))
 
 		return self.__manager.get_report_id(scan_id)
@@ -1037,7 +1038,7 @@ class VulnscanManager(object):
 	# ----------------------------------------------------------------------
 	def get_report_html(self, report_id):
 
-		if not isinstance(report_id, str):
+		if not isinstance(report_id, str) and not isinstance(report_id,future.types.newstr):
 			raise TypeError("Expected string, got %r instead" % type(report_id))
 
 		return self.__manager.get_report_html(report_id)
@@ -1046,7 +1047,7 @@ class VulnscanManager(object):
 	# ----------------------------------------------------------------------
 	def get_report_xml(self, report_id):
 
-		if not isinstance(report_id, str):
+		if not isinstance(report_id, str) and not isinstance(report_id,future.types.newstr):
 			raise TypeError("Expected string, got %r instead" % type(report_id))
 
 		return self.__manager.get_report_xml(report_id)
@@ -1055,7 +1056,7 @@ class VulnscanManager(object):
 	# ----------------------------------------------------------------------
 	def get_report_pdf(self, report_id):
 
-		if not isinstance(report_id, str):
+		if not isinstance(report_id, str)  and not isinstance(report_id,future.types.newstr):
 			raise TypeError("Expected string, got %r instead" % type(report_id))
 
 		return self.__manager.get_report_pdf(report_id)
@@ -1071,7 +1072,7 @@ class VulnscanManager(object):
 		:return: Progress percentage (between 0.0 and 100.0).
 		:rtype: float
 		"""
-		if not isinstance(task_id, str):
+		if not isinstance(task_id, str) and not isinstance(task_id,future.types.newstr):
 			raise TypeError("Expected string, got %r instead" % type(task_id))
 
 		return self.__manager.get_tasks_progress(task_id)

@@ -5,7 +5,7 @@ from __future__ import print_function
 
 from builtins import object
 """OpenVas Data Structures."""
-
+import future
 import re
 import sys
 
@@ -71,7 +71,7 @@ class OpenVASPort(object):
 		:param proto: network protocol: tcp, udp, icmp..
 		:type proto: str
 		"""
-		if not isinstance(port_name, str):
+		if not isinstance(port_name, str) and not isinstance(port_name,future.types.newstr):
 			raise TypeError("Expected string, got %r instead" % type(port_name))
 
 		if number:
@@ -82,7 +82,7 @@ class OpenVASPort(object):
 			else:
 				raise TypeError("Expected int, got %r instead" % type(number))
 
-		if not isinstance(proto, str):
+		if not isinstance(proto, str) and not isinstance(proto,future.types.newstr):
 			raise TypeError("Expected string, got %r instead" % type(proto))
 
 		self.__port_name = port_name.strip()
@@ -163,7 +163,7 @@ class OpenVASNVT(_Common):
 		"""
 		:type val: str
 		"""
-		if not isinstance(val, str):
+		if not isinstance(val, str) and not isinstance(val,future.types.newstr):
 			raise TypeError("Expected string, got %r instead" % type(val))
 
 		self.__oid = val
@@ -183,7 +183,7 @@ class OpenVASNVT(_Common):
 		"""
 		:type val: str
 		"""
-		if not isinstance(val, str):
+		if not isinstance(val, str) and not isinstance(val,future.types.newstr):
 			raise TypeError("Expected string, got %r instead" % type(val))
 
 		self.__name = val
@@ -204,7 +204,7 @@ class OpenVASNVT(_Common):
 		:param val: CVSS Base calculated
 		:type val: float
 		"""
-		if not isinstance(val, str):
+		if not isinstance(val, str) and not isinstance(val,future.types.newstr):
 			raise TypeError("Expected str, got %r instead" % type(val))
 
 		self.__cvss_base_vector = val
@@ -226,7 +226,7 @@ class OpenVASNVT(_Common):
 		:type val: float
 		"""
 		m = None
-		if isinstance(val, (str, int, float)):
+		if isinstance(val, (str, int, float, future.types.newstr)):
 			try:
 				m = float(val)
 
@@ -259,7 +259,7 @@ class OpenVASNVT(_Common):
 		:param val: the risk factor
 		:type val: int
 		"""
-		if not isinstance(val, str):
+		if not isinstance(val, str) and not isinstance(val,future.types.newstr):
 			raise TypeError("Expected int, got %r instead" % type(val))
 		if val not in self.risk_levels:
 			raise ValueError(
@@ -283,7 +283,7 @@ class OpenVASNVT(_Common):
 		:param val: The summary
 		:type val: str
 		"""
-		if not isinstance(val, str):
+		if not isinstance(val, str) and not isinstance(val,future.types.newstr):
 			raise TypeError("Expected string, got %r instead" % type(val))
 
 		self.__summary = val
@@ -304,7 +304,7 @@ class OpenVASNVT(_Common):
 		:param val: The raw_description of NVT
 		:type val: str
 		"""
-		if not isinstance(val, str):
+		if not isinstance(val, str) and not isinstance(val,future.types.newstr):
 			raise TypeError("Expected string, got %r instead" % type(val))
 
 		self.__description = val
@@ -325,7 +325,7 @@ class OpenVASNVT(_Common):
 		:param val: The family of NVT
 		:type val: str
 		"""
-		if not isinstance(val, str):
+		if not isinstance(val, str) and not isinstance(val,future.types.newstr):
 			raise TypeError("Expected string, got %r instead" % type(val))
 
 		self.__family = val
@@ -346,7 +346,7 @@ class OpenVASNVT(_Common):
 		:param val: The category that the NVT belongs
 		:type val: str
 		"""
-		if not isinstance(val, str):
+		if not isinstance(val, str) and not isinstance(val,future.types.newstr):
 			raise TypeError("Expected  str, got %r instead" % type(val))
 
 		self.__category = val
@@ -439,7 +439,7 @@ class OpenVASNVT(_Common):
 		:param val: The fingerprints associated
 		:type val: str
 		"""
-		if not isinstance(val, str):
+		if not isinstance(val, str) and not isinstance(val,future.types.newstr):
 			raise TypeError("Expected string, got %r instead" % type(val))
 
 		self.__fingerprints = val
@@ -474,7 +474,7 @@ class OpenVASNVT(_Common):
 		:type val: str|list
 
 		"""
-		if isinstance(val, str):
+		if isinstance(val, str) and not isinstance(val,future.types.newstr):
 			if val != "":
 				prop.append(val)
 		elif isinstance(val, list):
@@ -517,7 +517,7 @@ class OpenVASOverride(_Common):
 		"""
 		:type val: str
 		"""
-		if not isinstance(val, str):
+		if not isinstance(val, str) and not isinstance(val,future.types.newstr):
 			raise TypeError("Expected string, got %r instead" % type(val))
 
 		self.__nvt_oid = val
@@ -537,7 +537,7 @@ class OpenVASOverride(_Common):
 		"""
 		:type val: str
 		"""
-		if not isinstance(val, str):
+		if not isinstance(val, str) and not isinstance(val,future.types.newstr):
 			raise TypeError("Expected string, got %r instead" % type(val))
 
 		self.__nvt_name = val
@@ -557,7 +557,7 @@ class OpenVASOverride(_Common):
 		"""
 		:type val: str
 		"""
-		if not isinstance(val, str):
+		if not isinstance(val, str) and not isinstance(val,future.types.newstr):
 			raise TypeError("Expected string, got %r instead" % type(val))
 
 		self.__text = val
@@ -597,7 +597,7 @@ class OpenVASOverride(_Common):
 		"""
 		:type val: str - (Critical|High|Medium|Low|None|Log|Debug)
 		"""
-		if not isinstance(val, str):
+		if not isinstance(val, str) and not isinstance(val,future.types.newstr):
 			raise TypeError("Expected  str - (), got %r instead" % type(val))
 		if val not in self.risk_levels:
 			raise ValueError(
@@ -620,7 +620,7 @@ class OpenVASOverride(_Common):
 		"""
 		:type val: str - (Critical|High|Medium|Low|None|Log|Debug)
 		"""
-		if not isinstance(val, str):
+		if not isinstance(val, str) and not isinstance(val,future.types.newstr):
 			raise TypeError("Expected  str - (), got %r instead" % type(val))
 		if val not in self.risk_levels:
 			raise ValueError(
@@ -658,11 +658,11 @@ class OpenVASNotes(object):
 	# ----------------------------------------------------------------------
 	def __init__(self, oid, name, text, text_is_excerpt, orphan):
 
-		if not isinstance(oid, str):
+		if not isinstance(oid, str) and not isinstance(oid,future.types.newstr):
 			raise TypeError("Expected string, got %r instead" % type(oid))
-		if not isinstance(name, str):
+		if not isinstance(name, str) and not isinstance(name,future.types.newstr):
 			raise TypeError("Expected string, got %r instead" % type(name))
-		if not isinstance(text, str):
+		if not isinstance(text, str) and not isinstance(text,future.types.newstr):
 			raise TypeError("Expected string, got %r instead" % type(text))
 		if not isinstance(text_is_excerpt, bool):
 			raise TypeError("Expected bool, got %r instead" % type(text_is_excerpt))
@@ -788,7 +788,7 @@ class OpenVASResult(_Common):
 		"""
 		:type val: str
 		"""
-		if not isinstance(val, str):
+		if not isinstance(val, str) and not isinstance(val,future.types.newstr):
 			raise TypeError("Expected string, got %r instead" % type(val))
 
 		self.__id = val
@@ -808,7 +808,7 @@ class OpenVASResult(_Common):
 		"""
 		:type val: str
 		"""
-		if not isinstance(val, str):
+		if not isinstance(val, str) and not isinstance(val,future.types.newstr):
 			raise TypeError("Expected string, got %r instead" % type(val))
 
 		self.__host = val
@@ -847,7 +847,7 @@ class OpenVASResult(_Common):
 		"""
 		:type val: str
 		"""
-		if not isinstance(val, str):
+		if not isinstance(val, str) and not isinstance(val,future.types.newstr):
 			raise TypeError("Expected string, got %r instead" % type(val))
 
 		self.__subnet = val
@@ -888,7 +888,7 @@ class OpenVASResult(_Common):
 		:param val: valid values: "Critical", "High", "Medium", "Low", "None", "Log", "Debug"
 		:type val: str
 		"""
-		if isinstance(val, str):
+		if isinstance(val, str) and not isinstance(val,future.types.newstr):
 			if val not in self.risk_levels:
 				raise ValueError(
 					"Value incorrect. Allowed values are: Critical|High|Medium|Low|None|Log|Debug, got %s instead" % val)
@@ -913,7 +913,7 @@ class OpenVASResult(_Common):
 		"""
 		if val is None:
 			val = ""
-		elif not isinstance(val, str):
+		elif not isinstance(val, str) and not isinstance(val,future.types.newstr):
 			raise TypeError("Expected string, got %r instead" % type(val))
 
 		# --------------------------------------------------------------------------
@@ -1012,7 +1012,7 @@ class OpenVASResult(_Common):
 		"""
 		:type val: str
 		"""
-		if not isinstance(val, str):
+		if not isinstance(val, str) and not isinstance(val,future.types.newstr):
 			raise TypeError("Expected string, got %r instead" % type(val))
 
 		self.__severity = val
@@ -1032,7 +1032,7 @@ class OpenVASResult(_Common):
 		"""
         :type val: str
         """
-		if not isinstance(val, str):
+		if not isinstance(val, str) and not isinstance(val,future.types.newstr):
 			raise TypeError("Expected string, got %r instead" % type(val))
 
 		self.__name = val

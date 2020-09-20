@@ -7,6 +7,7 @@ This file contains OMPv4 implementation
 from __future__ import division
 
 from builtins import str
+import future
 from past.utils import old_div
 from openvas_lib import *
 from openvas_lib.common import *
@@ -262,7 +263,7 @@ class OMPv4(OMP):
         :raises: ClientError, ServerError
         """
 		from collections import Iterable
-		if isinstance(hosts, str):
+		if isinstance(hosts, str) or isinstance(hosts,future.types.newstr):
 			m_targets = hosts
 		elif isinstance(hosts, Iterable):
 			m_targets = str(",".join(hosts))
@@ -456,7 +457,7 @@ class OMPv4(OMP):
 
 		:raises: ClientError, ServerError
 		"""
-		if not isinstance(task_id, str):
+		if not isinstance(task_id, str) and not isinstance(task_id,future.types.newstr):
 			raise TypeError("Expected string, got %r instead" % type(task_id))
 
 		status = self.get_tasks().find('.//task[@id="%s"]/status' % task_id)
@@ -479,7 +480,7 @@ class OMPv4(OMP):
 
 		:raises: ClientError, ServerError
 		"""
-		if not isinstance(task_id, str):
+		if not isinstance(task_id, str) and not isinstance(task_id,future.types.newstr):
 			raise TypeError("Expected string, got %r instead" % type(task_id))
 
 		m_sum_progress = 0.0  # Partial progress
@@ -557,7 +558,7 @@ class OMPv4(OMP):
 
 	# ----------------------------------------------------------------------
 	def get_tasks_detail(self, scan_id):
-		if not isinstance(scan_id, str):
+		if not isinstance(scan_id, str) and not isinstance(scan_id,future.types.newstr):
 			raise TypeError("Expected string, got %r instead" % type(scan_id))
 
 		try:
@@ -574,7 +575,7 @@ class OMPv4(OMP):
 
 	# ----------------------------------------------------------------------
 	def get_report_pdf(self, report_id):
-		if not isinstance(report_id, str):
+		if not isinstance(report_id, str) and not isinstance(report_id,future.types.newstr):
 			raise TypeError("Expected string, got %r instead" % type(report_id))
 
 		try:
@@ -587,7 +588,7 @@ class OMPv4(OMP):
 
 	# ----------------------------------------------------------------------
 	def get_report_html(self, report_id):
-		if not isinstance(report_id, str):
+		if not isinstance(report_id, str) and not isinstance(report_id,future.types.newstr):
 			raise TypeError("Expected string, got %r instead" % type(report_id))
 
 		try:
@@ -600,7 +601,7 @@ class OMPv4(OMP):
 
 	# ----------------------------------------------------------------------
 	def get_report_xml(self, report_id):
-		if not isinstance(report_id, str):
+		if not isinstance(report_id, str) and not isinstance(report_id,future.types.newstr):
 			raise TypeError("Expected string, got %r instead" % type(report_id))
 
 		try:
@@ -620,7 +621,7 @@ class OMPv4(OMP):
 
 		:raises: ClientError, ServerError
 		"""
-		if not isinstance(task_id, str):
+		if not isinstance(task_id, str) and not isinstance(task_id,future.types.newstr):
 			raise TypeError("Expected string, got %r instead" % type(task_id))
 
 		m_query = '<start_task task_id="%s"/>' % task_id
