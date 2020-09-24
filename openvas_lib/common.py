@@ -379,6 +379,7 @@ class ConnectionManager(object):
 
 		:raises: ClientError, ServerError, TypeError, ValueError
 		"""
+		logging.debug("XMLDATA: '{}', type is {}".format(xmldata,type(xmldata)) )
 		if not isinstance(xmldata, str) or not isinstance(xmldata,future.types.newstr):
 			raise TypeError("Expected str, got '%s' instead" % type(xmldata))
 		if not isinstance(xml_result, bool):
