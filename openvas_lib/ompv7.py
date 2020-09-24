@@ -9,6 +9,7 @@ from __future__ import division
 
 from builtins import str
 import future
+import logging
 from past.utils import old_div
 from openvas_lib import *
 from openvas_lib.common import *
@@ -750,6 +751,7 @@ class OMPv7(OMP):
 
 		:raises: ClientError, ServerError
 		"""
+		logging.debug("task_id: '{}', type is {}".format(task_id,type(task_id)) )
 		if not isinstance(task_id, str) or not isinstance(task_id,future.types.newstr):
 			raise TypeError("Expected string, got %r instead" % type(task_id))
 
