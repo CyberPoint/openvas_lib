@@ -1038,7 +1038,7 @@ class VulnscanManager(object):
 	# ----------------------------------------------------------------------
 	def get_report_html(self, report_id):
 
-		if not isinstance(report_id, basestring)):
+		if not isinstance(report_id, basestring):
 			raise TypeError("Expected string, got %r instead" % type(report_id))
 
 		return self.__manager.get_report_html(report_id)
