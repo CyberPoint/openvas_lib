@@ -648,7 +648,7 @@ class VulnscanManager(object):
 		:rtype: (str, str)
 		"""
 
-		if not ((isinstance(target, basestring) or isinstance(target, Iterable)):
+		if not isinstance(target, basestring) and not isinstance(target, Iterable):
 			raise TypeError("Expected str or iterable, got %r instead" % type(target))
 
 		profile = kwargs.get("profile", "Full and fast")
